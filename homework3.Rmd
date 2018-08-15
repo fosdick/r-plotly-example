@@ -1,0 +1,51 @@
+---
+title: "Plotly week 3 homework"
+subtitle: "working with library plotly, 8/12/2018"
+author: "Jarvis Fosdick"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE, echo=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(ggplot2)
+library(plotly)
+data(mtcars)
+```
+## Basic Scatter plot
+```{r, message=FALSE, echo=FALSE}
+p = plot_ly(data=mtcars, x=~wt, y=~mpg, mode="markers")
+p
+```
+
+
+## Scatter plot with color
+
+```{r, message=FALSE, echo=FALSE}
+p = plot_ly(data=mtcars, x=~wt, y=~mpg, mode="markers", color = ~disp)
+p
+```
+
+## Box plot
+
+```{r, message=FALSE, echo=FALSE}
+p <- plot_ly(y = ~rnorm(50), type = "box") %>%
+  add_trace(y = ~rnorm(50, 1))
+
+p
+```
+
+## Jitter Points
+
+```{r, message=FALSE,echo=FALSE}
+p <- plot_ly(y = ~rnorm(50), type = "box", boxpoints = "all", jitter = 0.3,
+        pointpos = -1.8)
+p
+```
+
+## Grouped Box Plots
+
+```{r, echo=FALSE, message=FALSE,echo=FALSE}
+p <- plot_ly(ggplot2::diamonds, x = ~cut, y = ~price, color = ~clarity, type = "box") %>%
+  layout(boxmode = "group")
+p
+```
